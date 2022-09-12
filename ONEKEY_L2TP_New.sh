@@ -221,10 +221,10 @@ preinstall_l2tp(){
             exit 0
         fi
     fi
-	iprange="192.168.18"
-	mypsk="123456789a"
-	username="admin"
-	password="admin"
+    iprange="192.168.18"
+    mypsk="123456789a"
+    username="admin"
+    password="admin"
 
     echo
     echo "ServerIP:${IP}"
