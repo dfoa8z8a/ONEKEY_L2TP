@@ -221,19 +221,9 @@ preinstall_l2tp(){
             exit 0
         fi
     fi
-    echo
-    echo "(Default Range: 192.168.18)"
 	iprange="192.168.18"
-
-    echo "(Default PSK: 123456789a)"
 	mypsk="123456789a"
-
-    echo "(Default Username: admin)"
 	username="admin"
-
-    password=`rand`
-	
-    echo "(Default Password: admin)"
 	password="admin"
 
     echo
