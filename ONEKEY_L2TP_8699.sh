@@ -343,7 +343,7 @@ conn l2tp-psk-nonat
     type=transport
     left=%defaultroute
     leftid=${IP}
-    leftprotoport=17/8689
+    leftprotoport=17/8699
     right=%any
     rightprotoport=17/%any
     dpddelay=40
@@ -358,7 +358,7 @@ EOF
 
     cat > /etc/xl2tpd/xl2tpd.conf<<EOF
 [global]
-port = 8689
+port = 8699
 
 [lns default]
 ip range = ${iprange}.2-${iprange}.254
@@ -450,7 +450,7 @@ EOF
 -A INPUT -p icmp -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 -A INPUT -p tcp --dport 22 -j ACCEPT
--A INPUT -p udp -m multiport --dports 500,4500,8689 -j ACCEPT
+-A INPUT -p udp -m multiport --dports 500,4500,8699 -j ACCEPT
 -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 -A FORWARD -s ${iprange}.0/24  -j ACCEPT
 COMMIT
@@ -462,7 +462,7 @@ COMMIT
 COMMIT
 EOF
         else
-            iptables -I INPUT -p udp -m multiport --dports 500,4500,8689 -j ACCEPT
+            iptables -I INPUT -p udp -m multiport --dports 500,4500,8699 -j ACCEPT
             iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
             iptables -I FORWARD -s ${iprange}.0/24  -j ACCEPT
             iptables -t nat -A POSTROUTING -s ${iprange}.0/24 -j SNAT --to-source ${IP}
@@ -500,7 +500,7 @@ EOF
 -A INPUT -p icmp -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 -A INPUT -p tcp --dport 22 -j ACCEPT
--A INPUT -p udp -m multiport --dports 500,4500,8689 -j ACCEPT
+-A INPUT -p udp -m multiport --dports 500,4500,8699 -j ACCEPT
 -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 -A FORWARD -s ${iprange}.0/24  -j ACCEPT
 COMMIT
@@ -512,7 +512,7 @@ COMMIT
 COMMIT
 EOF
         else
-            iptables -I INPUT -p udp -m multiport --dports 500,4500,8689 -j ACCEPT
+            iptables -I INPUT -p udp -m multiport --dports 500,4500,8699 -j ACCEPT
             iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
             iptables -I FORWARD -s ${iprange}.0/24  -j ACCEPT
             iptables -t nat -A POSTROUTING -s ${iprange}.0/24 -j SNAT --to-source ${IP}
@@ -579,7 +579,7 @@ yum_install(){
   <short>xl2tpd</short>
   <description>L2TP IPSec</description>
   <port protocol="udp" port="4500"/>
-  <port protocol="udp" port="8689"/>
+  <port protocol="udp" port="8699"/>
 </service>
 EOF
     chmod 640 /etc/firewalld/services/xl2tpd.xml
@@ -597,7 +597,7 @@ EOF
         firewall-cmd --permanent --add-service=ipsec
         firewall-cmd --permanent --add-service=xl2tpd
         firewall-cmd --permanent --add-masquerade
-        firewall-cmd --permanent --add-port=8689/udp
+        firewall-cmd --permanent --add-port=8699/udp
         firewall-cmd --reload
     else
         echo "Firewalld looks like not running, trying to start..."
@@ -611,7 +611,7 @@ EOF
             firewall-cmd --permanent --add-service=ipsec
             firewall-cmd --permanent --add-service=xl2tpd
             firewall-cmd --permanent --add-masquerade
-            firewall-cmd --permanent --add-port=8689/udp
+            firewall-cmd --permanent --add-port=8699/udp
             firewall-cmd --reload
         else
             echo "Failed to start firewalld. please enable udp port 500 4500 8686 manually if necessary."
